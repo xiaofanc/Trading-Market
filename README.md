@@ -30,9 +30,12 @@ pip3 install flask-sqlalchemy
 ```
 
 templates directory: store all html files
+
 bootstrap starter template: styling framework
 https://getbootstrap.com/docs/4.5/getting-started/introduction/
+
 Jinja syntax: allow access the parameters sent by the router
+
 template inheritance: put common html code into one base template, then {% extends 'base.html' %} to use it
 
 DB Browser for SQLite
