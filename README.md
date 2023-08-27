@@ -184,7 +184,10 @@ pusrchase item
 - create a new form for purchasing items
 - add form to modal
 - if you want to print the purchase_form after submitting the purchase:
-    `print(purchase_form.__dict__)`
+```
+    print(purchase_form.__dict__)
+    print(purchase_form['submit'])
+```
 - get the purchased item from request.form
     `purchased_item = request.form.get('purchased_item')`
 - add ownership of the purchase
