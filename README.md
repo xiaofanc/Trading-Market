@@ -6,7 +6,7 @@ source venv/bin/activate
 
 # set flask app
 export FLASK_APP=market.py
-# set debug mode
+# set debug mode on, so we don't have to restart the app for every change
 export FLASK_DEBUG=1
 # run the app
 flask run
@@ -81,7 +81,7 @@ item=Phone 10
 <User 1>
 ```
 
-add register html
+add register page
 ```
 pip3 install flask-wtf
 ```
@@ -93,3 +93,112 @@ generate hexadecimal random character as SECRET_KEY when user submits register f
 >>> os.urandom(12).hex()
 'f595e088df5d3e1cc981fa8d'
 ```
+
+install email validation support
+```
+pip3 install email_validator
+```
+
+flash error messages when validation is wrong during register
+```
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+    <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+```
+
+capture the error if usename or email is not unique using ValidationError
+```
+def validate_username(self, username_to_check):
+    user = User.query.filter_by(username=username_to_check.data).first()
+    if user:
+        raise ValidationError('Username already exists! Please try a different username')
+
+```
+
+store encrypted password instead
+```
+pip3 install flask_bcrypt
+# create a bcrypt instance in the init file
+# set the password property in the User model
+```
+
+add login page, create a login manager for the app
+```
+pip3 install flask_login
+```
+
+define a method to check if the password is matched with the hashed password in the model
+```
+def check_password(self, attempted_password):
+    return bcrypt.check_password_hash(self.password_hash, attempted_password)
+```
+
+make sure every page knows about the login user
+```
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Inherit from a class (UserMixin) that provides default implementations for the methods that Flask-Login expects user objects to have.
+```
+
+optimize the navbar if the user is logged in
+```
+{% if current_user.is_authenticated %}
+    # show welcom message and budget
+    # show log out button
+{% else %}
+    # show log in button
+    # show register button
+{% endif %}
+```
+
+add logout page && redirect to the home page
+
+login required to see the market page && add login automatically after registeration
+```
+add decorator @login_required in the market route
+add following in the init:
+login_manager.login_view = "login_page"
+login_manager.login_message_category = "info"
+```
+
+divide the market into two parts
+https://getbootstrap.com/docs/4.0/layout/grid/
+
+add modal for buttons (popup window)
+https://getbootstrap.com/docs/4.0/components/modal/
+
+pusrchase item
+```
+# create a new form for purchasing items
+# add form to modal
+# if you want to print the purchase_form after submitting the purchase:
+    print(purchase_form.__dict__)
+# get the purchased item from request.form
+    purchased_item = request.form.get('purchased_item')
+# add ownership of the purchase
+# remove item which is purchased from the market
+```
+
+add my items page to sell items
+```
+# display the owned items as cards
+# create a new form for selling items
+# add form to modal
+# to trigger a modal, we include the modal in html
+# get the selling item from request.form
+
+```
+
+
+
