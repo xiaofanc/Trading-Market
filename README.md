@@ -199,6 +199,6 @@ add my items page to sell items
 - add form to modal
 - to trigger a modal, we include the modal in html
 - get the selling item from request.form
-
+- remove ownership of the item and put it back to the market
 
 
