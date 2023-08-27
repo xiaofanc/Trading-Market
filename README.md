@@ -1,17 +1,19 @@
 # Flask - Trading market
+Create a virtual environment named "venv"
 ```
-# Create a virtual environment named "venv"
 python -m venv venv
 source venv/bin/activate
+```
 
-# set flask app
-export FLASK_APP=market.py
-# set debug mode on, so we don't have to restart the app for every change
-export FLASK_DEBUG=1
-# run the app
-flask run
+set flask app
+`export FLASK_APP=market.py`
+set debug mode on, so we don't have to restart the app for every change
+`export FLASK_DEBUG=1`
+run the app
+`flask run`
 
-# install sqlalchemy
+install sqlalchemy
+```
 pip3 install flask-sqlalchemy
 # create database
 >>> python3
