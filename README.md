@@ -6,9 +6,9 @@ source venv/bin/activate
 ```
 
 set flask app
-`export FLASK_APP=market.py`
+`export FLASK_APP=market.py` \
 set debug mode on, so we don't have to restart the app for every change
-`export FLASK_DEBUG=1`
+`export FLASK_DEBUG=1` \
 run the app
 `flask run`
 
