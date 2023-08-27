@@ -191,14 +191,11 @@ pusrchase item
 ```
 
 add my items page to sell items
-```
-# display the owned items as cards
-# create a new form for selling items
-# add form to modal
-# to trigger a modal, we include the modal in html
-# get the selling item from request.form
-
-```
+- display the owned items as cards
+- create a new form for selling items
+- add form to modal
+- to trigger a modal, we include the modal in html
+- get the selling item from request.form
 
 
 
