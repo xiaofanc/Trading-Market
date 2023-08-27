@@ -21,10 +21,8 @@ def market_page():
         if item:
             # assign ownership of purchase
             if current_user.can_purchase(item):
-                item.owner = current_user.id
-                current_user.budget -= item.price
-                db.session.commit()
-                flash(f"Congratulations! You purchased {item.name} for ${item.price}", category="success")
+                item.buy(current_user)
+                flash(f"Congratulations! You purchased {item.name} for ${item.price} !!", category="success")
             else:
                 flash(f"Unfortunately, you do not have enough money to purchase {item.name}", category="danger")
         return redirect(url_for('market_page'))
@@ -75,12 +73,24 @@ def logout_page():
     flash("You have been logged out!", category='info')
     return redirect(url_for("home_page"))
 
-@app.route('/myitems')
+@app.route('/myitems', methods=['GET', 'POST'])
 @login_required
 def items_page():
     selling_form = SellItemForm()
-    owned_items = Item.query.filter_by(owner=current_user.id)
-    return render_template('myitems.html', owned_items=owned_items, selling_form=selling_form)
+    if request.method == "POST":
+        sold_item = request.form.get('sold_item')
+        item = Item.query.filter_by(name=sold_item).first()
+        if item:
+            # remove ownership of the item
+            if current_user.can_sell(item):
+                item.sell(current_user)
+                flash(f"Congratulations! You sold {item.name} for ${item.price} !!", category="success")
+            else:
+                flash(f"Something wrong with selling {item.name}", category="danger")
+        return redirect(url_for('market_page'))
+    if request.method == "GET":
+        owned_items = Item.query.filter_by(owner=current_user.id)
+        return render_template('myitems.html', owned_items=owned_items, selling_form=selling_form)
 
 
 
