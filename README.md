@@ -44,8 +44,8 @@ DB Browser for SQLite
 https://sqlitebrowser.org/blog/version-3-12-2-released/
 
 reconstructure:
-add python files to the market package
-
+- add python files to the market package
+- add __init__ file for the app
 ```
 # run the app after reconstructure
 python3 run.py
