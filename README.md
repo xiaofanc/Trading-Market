@@ -179,16 +179,14 @@ add modal for buttons (popup window)
 https://getbootstrap.com/docs/4.0/components/modal/
 
 pusrchase item
-```
-# create a new form for purchasing items
-# add form to modal
-# if you want to print the purchase_form after submitting the purchase:
-    print(purchase_form.__dict__)
-# get the purchased item from request.form
-    purchased_item = request.form.get('purchased_item')
-# add ownership of the purchase
-# remove item which is purchased from the market
-```
+- create a new form for purchasing items
+- add form to modal
+- if you want to print the purchase_form after submitting the purchase:
+    `print(purchase_form.__dict__)`
+- get the purchased item from request.form
+    `purchased_item = request.form.get('purchased_item')`
+- add ownership of the purchase
+- remove item which is purchased from the market
 
 add my items page to sell items
 - display the owned items as cards
